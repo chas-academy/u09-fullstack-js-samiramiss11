@@ -1,0 +1,1 @@
+//For managing user authentication state and functions (e.g., login, logout).
