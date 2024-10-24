@@ -24,17 +24,20 @@ const Header = () => {
   <div className="relative" ref={navRef}>
     <button
       onClick={toggleNav}
-      className="flex flex-col items-center p-4 text-lg bg-gray-800 rounded hover:bg-gray-700 transition"
+      className="flex flex-col items-center p-4 text-l bg-gray-300 rounded hover:bg-gray-300 transition"
     >
-      <div className="h-1 w-8 bg-white mb-1" />
-      <div className="h-1 w-8 bg-white mb-1" />
-      <div className="h-1 w-8 bg-white" />
-      <span className="text-white">Menu</span>
+      <div className="h-1 w-6 bg-white mb-1" />
+      <div className="h-1 w-6 bg-white mb-1" />
+      <div className="h-1 w-6 bg-white " />
+      <span className="text-white"></span>
     </button>
     {isNavOpen && (
-      <ul className="absolute left-0 mt-2 w-48 bg-gray-800 rounded-lg shadow-lg">
+      <ul className="absolute left-0 mt-2 w-48 bg-gray-100 rounded-lg shadow-lg">
         <li>
           <Link to="/" className="block px-4 py-2 hover:bg-gray-700">Home</Link>
+        </li>
+        <li>
+          <Link to="/history-literary" className="block px-4 py-2 hover:bg-gray-700">HistoryLiterary</Link>
         </li>
         <li>
           <Link to="/books" className="block px-4 py-2 hover:bg-gray-700">Books</Link>
@@ -54,23 +57,24 @@ const Header = () => {
     <input
       type="text"
       placeholder="Search..."
-      className="w-full p-2 rounded bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      className="w-full p-2 rounded bg-gray-100 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
     />
   </div>
 
   {/* Right User Dropdown */}
   <div className="relative" ref={userRef}>
-    <button onClick={toggleUser} className="flex items-center p-4">
-      <FaUser className="h-8 w-8" />
+    <button onClick={toggleUser} className="flex items-center p-4 ">
+      <FaUser className="h-4 w-4 " />
     </button>
     {isUserOpen && (
-      <ul className="absolute right-0 mt-2 w-48 bg-gray-800 rounded-lg shadow-lg">
+      <ul className="absolute right-0 mt-2 w-48 bg-gray-300 rounded-lg shadow-lg">
         <li>
           <Link to="/login" className="block px-4 py-2 hover:bg-gray-700">Sign In</Link>
         </li>
         <li>
           <Link to="/user-dashboard" className="block px-4 py-2 hover:bg-gray-700">Profile</Link>
         </li>
+        <li className="block px-4 py-2 hover:bg-gray-700">Sign Out</li>
       </ul>
     )}
   </div>

@@ -1,4 +1,7 @@
 import React from 'react';
+import { FaHeart } from 'react-icons/fa'; // Import the heart icon
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 const AuthorCard = () => {
   // Placeholder data, replace with API fetched data later
@@ -12,7 +15,11 @@ const AuthorCard = () => {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-4 max-w-sm mx-auto">
+    <div><Header/>
+    <div className="relative bg-white rounded-lg shadow-md p-4 max-w-sm mx-auto">
+      {/* Heart icon positioned at the top-right */}
+      <FaHeart className="absolute top-2 right-2 text-gray-400 hover:text-teal-500 cursor-pointer text-lg" />
+      
       <img
         src={author.imageUrl}
         alt={author.name}
@@ -28,10 +35,10 @@ const AuthorCard = () => {
         ))}
       </ul>
       <p className="mb-4">{author.description}</p>
-      <button className="bg-blue-500 text-white py-2 px-4 rounded">
-        Save Content
-      </button>
-    </div>
+    
+      </div>
+      <Footer/>
+      </div>
   );
 };
 

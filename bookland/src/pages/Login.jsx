@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import API from '../utils/api'; // Adjusted path to match your structure
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 const Login = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -55,7 +57,9 @@ const Login = () => {
   };
 
   return (
+    <div><Header />
     <div className="shadow-secondary flex justify-center items-center pt-8 pb-9 bg-primary">
+      
       <div className="w-full max-w-xs p-8 bg-primary shadow-secondary rounded-2xl">
         <div className="flex justify-between mb-4 p-6">
           <button
@@ -139,7 +143,9 @@ const Login = () => {
           </form>
         )}
       </div>
-    </div>
+      </div>
+      <Footer/>
+      </div>
   );
 };
 

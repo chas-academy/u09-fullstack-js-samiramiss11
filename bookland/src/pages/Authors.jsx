@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import AuthorCard from '../components/AuthorCard';
+import { FaHeart } from 'react-icons/fa'; // Import the heart icon
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 const Authors = () => {
   // Placeholder data for literary concepts and their writers
@@ -23,6 +25,7 @@ const Authors = () => {
   ];
 
   return (
+    <div><Header/>
     <div className="p-4">
       <h1 className="text-2xl font-bold text-center mb-6">Authors</h1>
 
@@ -34,8 +37,11 @@ const Authors = () => {
             {concept.writers.map((writer, writerIndex) => (
               <div
                 key={writerIndex}
-                className="bg-white rounded-lg shadow-md p-4 text-center cursor-pointer"
+                className="relative bg-white rounded-lg shadow-md p-4 text-center cursor-pointer"
               >
+                {/* Heart icon positioned at the top-right */}
+                <FaHeart className="absolute top-2 right-2 text-gray-400 hover:text-teal-500 cursor-pointer text-lg" />
+
                 <Link to={`/author/${writer.name}`}>
                   <img
                     src={writer.imageUrl}
@@ -50,9 +56,8 @@ const Authors = () => {
           </div>
         </div>
       ))}
-
-      {/* Optional: Add the AuthorCard component for direct access */}
-      {/* <AuthorCard /> */}
+    </div>
+    <Footer/>
     </div>
   );
 };

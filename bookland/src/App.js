@@ -14,6 +14,8 @@ import Login from './pages/Login';
 import ErrorPage from './pages/ErrorPage';
 import { AuthProvider } from './context/AuthContext';
 import AuthorCard from './components/AuthorCard';
+import BookCard from './components/BookCard';
+
 
 
 const App = () => {
@@ -24,7 +26,7 @@ const App = () => {
     <Route path="/" element={<Home />} />
     <Route path="/history-literary" element={<HistoryLiterary />} />
     <Route path="/books" element={<Books />} />
-    <Route path="/authors" element={<Authors />} />
+    <Route path="/book/:name" element={<BookCard />} />
     <Route path="/news" element={<News />} />
     <Route path="/user-dashboard" element={<UserDashboard />} />
     <Route path="/admin-dashboard" element={<AdminDashboard />} />
@@ -35,6 +37,8 @@ const App = () => {
     <Route path="*" element={<ErrorPage />} />
     <Route path="/authors" element={<Authors />} />
     <Route path="/author/:name" element={<AuthorCard />} />
+    
+
 </Routes>
       </Router>
     </AuthProvider>

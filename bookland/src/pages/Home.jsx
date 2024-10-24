@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Authors from './Authors';
 import AuthorCard from '../components/AuthorCard';
+import Login from './Login';
 
 const Home = () => {
   return (
@@ -11,8 +12,9 @@ const Home = () => {
       <Header />
       <h1>Welcome to Book Explorer</h1>
       {/* Add more content as needed */}
-      <Footer />
-      <Authors/>
+      
+      <Footer/>
+      
     </div>
   );
 };
