@@ -1,0 +1,62 @@
+[
+    {
+      "question": "Mindfulness practice primarily trains you to:",
+      "options": [
+        "Suppress all thoughts",
+        "Observe thoughts non-judgmentally",
+        "Multitask effectively",
+        "Increase mind-wandering"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "A simple mindfulness exercise is:",
+      "options": [
+        "Counting backward from 100",
+        "Body scan awareness",
+        "Speed reading",
+        "Memory recall"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "Research shows that regular mindfulness reduces activity in the:",
+      "options": [
+        "Amygdala (fear center)",
+        "Motor cortex",
+        "Visual cortex",
+        "Broca’s area"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Breathing attention in mindfulness focuses on:",
+      "options": [
+        "Inhaling only",
+        "The sensation of each breath",
+        "Counting your heartbeats",
+        "Visualizing past events"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "After 8 weeks of daily mindfulness training, studies show:",
+      "options": [
+        "No measurable brain change",
+        "Increased gray matter in hippocampus",
+        "Permanent insomnia",
+        "Loss of language skills"
+      ],
+      "correctIndex": 1
+    },
+  
+    {
+      "analysis": {
+        "0": "It looks like anxiety symptoms may not be prominent for you right now. Keep practicing stress-reduction skills!",
+        "1": "You scored low—your anxiety is under control in most situations. Continue your healthy coping habits.",
+        "3": "Moderate anxiety signs—consider adding regular mindfulness and journaling to your routine.",
+        "5": "High anxiety indicators—you may benefit from professional support and consistent relaxation practice."
+      }
+    }
+    ]
+  

@@ -1,0 +1,61 @@
+[
+    {
+      "question": "The “Big Five” personality trait that describes sociability vs. reserve is called:",
+      "options": [
+        "Neuroticism",
+        "Extraversion",
+        "Openness",
+        "Conscientiousness"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "High conscientiousness is associated with:",
+      "options": [
+        "Impulsivity",
+        "Organization and self-discipline",
+        "Emotional instability",
+        "Strong visual imagination"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "A person scoring high in neuroticism is more likely to experience:",
+      "options": [
+        "Calmness",
+        "Anxiety and mood swings",
+        "Risk‐taking behaviors",
+        "Artistic creativity"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "Openness to experience often correlates with:",
+      "options": [
+        "Traditionalism",
+        "Preference for routine",
+        "Artistic interests",
+        "High levels of stress"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question": "Agreeableness primarily measures:",
+      "options": [
+        "Emotional stability",
+        "Trust and cooperativeness",
+        "Attention to detail",
+        "Social charisma"
+      ],
+      "correctIndex": 1
+    },
+  
+    {
+      "analysis": {
+        "0": "It looks like anxiety symptoms may not be prominent for you right now. Keep practicing stress-reduction skills!",
+        "1": "You scored low—your anxiety is under control in most situations. Continue your healthy coping habits.",
+        "3": "Moderate anxiety signs—consider adding regular mindfulness and journaling to your routine.",
+        "5": "High anxiety indicators—you may benefit from professional support and consistent relaxation practice."
+      }
+    }
+    ]

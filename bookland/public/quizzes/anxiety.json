@@ -1,0 +1,61 @@
+[
+    {
+      "question": "Which of the following is a hallmark symptom of generalized anxiety disorder?",
+      "options": [
+        "Persistent, excessive worry about everyday things",
+        "Hallucinations",
+        "Recurrent binge eating",
+        "Periodic memory loss"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "The “fight-or-flight” response in anxiety is primarily mediated by the:",
+      "options": [
+        "Parasympathetic nervous system",
+        "Sympathetic nervous system",
+        "Enteric nervous system",
+        "Somatic nervous system"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "Which neurotransmitter is most closely linked to reducing anxiety when its levels are increased?",
+      "options": [
+        "Dopamine",
+        "Serotonin",
+        "Glutamate",
+        "Histamine"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "A common cognitive distortion in anxiety is:",
+      "options": [
+        "Black-and-white thinking",
+        "Selective abstraction",
+        "Catastrophizing",
+        "Mind-reading"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question": "Which breathing technique can help immediately lower acute anxiety?",
+      "options": [
+        "Rapid shallow breathing",
+        "4-7-8 breathing (inhale 4 sec, hold 7 sec, exhale 8 sec)",
+        "Breath holding for 30 seconds",
+        "Mouth only breathing"
+      ],
+      "correctIndex": 1
+    },
+  
+{
+  "analysis": {
+    "0": "It looks like anxiety symptoms may not be prominent for you right now. Keep practicing stress-reduction skills!",
+    "1": "You scored low—your anxiety is under control in most situations. Continue your healthy coping habits.",
+    "3": "Moderate anxiety signs—consider adding regular mindfulness and journaling to your routine.",
+    "5": "High anxiety indicators—you may benefit from professional support and consistent relaxation practice."
+  }
+}
+]

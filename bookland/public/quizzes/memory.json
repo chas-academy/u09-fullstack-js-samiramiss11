@@ -1,0 +1,61 @@
+[
+    {
+      "question": "Which memory type lets you recall facts and general knowledge?",
+      "options": [
+        "Procedural memory",
+        "Semantic memory",
+        "Sensory memory",
+        "Episodic memory"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "Chunking information (like phone numbers) improves:",
+      "options": [
+        "Long-term potentiation",
+        "Working memory capacity",
+        "Implicit memory",
+        "Sensory registration"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "The phenomenon of remembering the first items in a list best is called:",
+      "options": [
+        "Recency effect",
+        "Primacy effect",
+        "Interference",
+        "Pattern separation"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "Which activity is shown to boost hippocampal (memory center) health?",
+      "options": [
+        "High-intensity interval training (HIIT)",
+        "Aerobic exercise",
+        "Prolonged screen time",
+        "Sleep deprivation"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "Rehearsal (repetition) aids memory by strengthening:",
+      "options": [
+        "Synaptic connections",
+        "Motor skills",
+        "Olfactory pathways",
+        "Emotional valence"
+      ],
+      "correctIndex": 0
+    },
+  
+    {
+      "analysis": {
+        "0": "It looks like anxiety symptoms may not be prominent for you right now. Keep practicing stress-reduction skills!",
+        "1": "You scored low—your anxiety is under control in most situations. Continue your healthy coping habits.",
+        "3": "Moderate anxiety signs—consider adding regular mindfulness and journaling to your routine.",
+        "5": "High anxiety indicators—you may benefit from professional support and consistent relaxation practice."
+      }
+    }
+    ]

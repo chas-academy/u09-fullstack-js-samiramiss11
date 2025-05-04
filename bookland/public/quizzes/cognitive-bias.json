@@ -1,0 +1,62 @@
+[
+    {
+      "question": "The tendency to look for evidence that confirms our pre-existing beliefs is called:",
+      "options": [
+        "Availability bias",
+        "Confirmation bias",
+        "Anchoring bias",
+        "Hindsight bias"
+      ],
+      "correctIndex": 1
+    },
+    {
+      "question": "When we rely too heavily on the first piece of information offered, that's:",
+      "options": [
+        "Anchor bias",
+        "Similarity bias",
+        "Bandwagon effect",
+        "Negativity bias"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Overestimating how often we see negative news because it’s salient is:",
+      "options": [
+        "Availability heuristic",
+        "Dunning-Kruger effect",
+        "Optimism bias",
+        "Status quo bias"
+      ],
+      "correctIndex": 0
+    },
+    {
+      "question": "Believing you “knew it all along” after learning an outcome is:",
+      "options": [
+        "Outcome bias",
+        "Survivorship bias",
+        "Hindsight bias",
+        "Actor-observer bias"
+      ],
+      "correctIndex": 2
+    },
+    {
+      "question": "Ignoring statistical reality because we remember vivid stories is:",
+      "options": [
+        "Confirmation bias",
+        "Gambler’s fallacy",
+        "Availability heuristic",
+        "False consensus effect"
+      ],
+      "correctIndex": 2
+    },
+  
+    {
+      "analysis": {
+        "0": "It looks like anxiety symptoms may not be prominent for you right now. Keep practicing stress-reduction skills!",
+        "1": "You scored low—your anxiety is under control in most situations. Continue your healthy coping habits.",
+        "3": "Moderate anxiety signs—consider adding regular mindfulness and journaling to your routine.",
+        "5": "High anxiety indicators—you may benefit from professional support and consistent relaxation practice."
+      }
+    }
+    ]
+  

@@ -1,0 +1,13 @@
+# server-side deps
+node_modules/
+
+# build/output (if you ever compile/transpile)
+dist/
+build/
+
+# local env  
+.env
+
+# logs & coverage
+*.log
+coverage/
