@@ -1,62 +1,111 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaGithub, FaEnvelope, FaLinkedin } from 'react-icons/fa';
-
+import ScrollToTopButton from '../components/ScrollToTopButton';
 const Footer = () => {
   return (
-    <footer className="bg-gray-800 text-white p-6 mt-8">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* General Pages */}
+    <footer className="bg-primary text-white">
+    <div className="container text-center mx-auto pl-8 md:p-16 p-8">
+      {/* Mobile Accordion */}
+      <div className="md:hidden space-y-4">
+        {[
+          {
+            title: 'General Pages',
+            links: [
+              { to: '/', label: 'Home' },
+              { to: '/about-us', label: 'About Us' },
+              { to: '/contact-us', label: 'Contact Us' },
+              { to: '/privacy-policy', label: 'Privacy Policy' },
+              { to: '/terms-service', label: 'Terms of Service' },
+              { to: '/sitemap', label: 'Site Map' },
+            ],
+          },
+          {
+            title: 'Psychology Topics',
+            links: [
+              { to: '/core-concepts', label: 'Core Concepts' },
+              { to: '/therapies', label: 'Therapies & Approaches' },
+              { to: '/theories', label: 'Famous Theories' },
+              { to: '/methods', label: 'Research Methods' },
+            ],
+          },
+          {
+            title: 'Explore More',
+            links: [
+              { to: '/news', label: 'Latest News' },
+              { to: '/quiz', label: 'Quizzes' },
+              { to: '/books', label: 'Recommended Books' },
+            ],
+          },
+        ].map((section) => (
+          <details key={section.title} className="border-b pb-4">
+            <summary className="cursor-pointer text-lg font-bold">
+              {section.title}
+            </summary>
+            <ul className="mt-2 space-y-1 pl-4">
+              {section.links.map((link) => (
+                <li key={link.to}>
+                  <Link to={link.to} className="hover:underline">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </details>
+        ))}
+      </div>
+
+      {/* Desktop Grid */}
+      <div className="hidden md:grid md:grid-cols-3 md:gap-6">
+        {/* Duplicate the same three sections */}
         <div>
           <h2 className="text-lg font-bold mb-2">General Pages</h2>
-          <ul className="space-y-1">
-            <li><Link to="/" className="text-blue-400 hover:underline">Home</Link></li>
-            <li><Link to="/about-us" className="text-blue-400 hover:underline">About Us</Link></li>
-            <li><Link to="/contact-us" className="text-blue-400 hover:underline">Contact Us</Link></li>
-            <li><Link to="/privacy-policy" className="text-blue-400 hover:underline">Privacy Policy</Link></li>
-            <li><Link to="/terms-of-service" className="text-blue-400 hover:underline">Terms of Service</Link></li>
+          <ul className="space-y-1 text-gray-300">
+            <li><Link to="/" className="hover:underline">Home</Link></li>
+            <li><Link to="/about-us" className="hover:underline">About Us</Link></li>
+            <li><Link to="/contact-us" className="hover:underline">Contact Us</Link></li>
+            <li><Link to="/privacy-policy" className="hover:underline">Privacy Policy</Link></li>
+            <li><Link to="/terms-service" className="hover:underline">Terms of Service</Link></li>
+            <li><Link to="/sitemap" className="hover:underline">Site Map</Link></li>
           </ul>
         </div>
 
-        {/* Literary Arts Categories */}
         <div>
-          <h2 className="text-lg font-bold mb-2">Literary Arts Categories</h2>
-          <ul className="space-y-1">
-            <li><Link to="/history-literary" className="text-blue-400 hover:underline">History Literary</Link></li>
-            <li><Link to="/books" className="text-blue-400 hover:underline">Books</Link></li>
-            <li><Link to="/authors" className="text-blue-400 hover:underline">Authors</Link></li>
-            <li><Link to="/news" className="text-blue-400 hover:underline">News</Link></li>
+          <h2 className="text-lg font-bold mb-2">Psychology Topics</h2>
+          <ul className="space-y-1 text-gray-300">
+            <li><Link to="/core-concepts" className="hover:underline">Do I Need Therapy?</Link></li>
+            <li><Link to="/therapies" className="hover:underline">Therapies & Approaches</Link></li>
+            <li><Link to="/theories" className="hover:underline">Famous Theories</Link></li>
+            <li><Link to="/methods" className="hover:underline">Research Methods</Link></li>
           </ul>
         </div>
 
-        {/* User and Admin Pages */}
         <div>
-          <h2 className="text-lg font-bold mb-2">User & Admin</h2>
-          <ul className="space-y-1">
-            <li><Link to="/user-dashboard" className="text-blue-400 hover:underline">User Dashboard</Link></li>
-            <li><Link to="/saved-content" className="text-blue-400 hover:underline">Saved Content</Link></li>
-            <li><Link to="/admin-dashboard" className="text-blue-400 hover:underline">Admin Dashboard</Link></li>
-            <li><Link to="/manage-users" className="text-blue-400 hover:underline">Manage Users</Link></li>
-            <li><Link to="/manage-content" className="text-blue-400 hover:underline">Manage Content</Link></li>
+          <h2 className="text-lg font-bold mb-2">Explore More</h2>
+          <ul className="space-y-1 text-gray-300">
+            <li><Link to="/news" className="hover:underline">Quiz & Quote</Link></li>
+            <li><Link to="/news" className="hover:underline">Behavior Exercises</Link></li>
+            <li><Link to="/books" className="hover:underline">Recommended Books</Link></li>
           </ul>
         </div>
       </div>
 
-      {/* Social Media Icons */}
-      <div className="flex justify-center space-x-4 mt-6">
-        <a href="https://github.com/YOUR_GITHUB_PROFILE" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-          <FaGithub className="text-2xl hover:text-gray-500" />
+      {/* Social Icons */}
+      <div className="flex justify-center space-x-6 mt-8">
+        <a href="https://github.com/samiramiss11" aria-label="GitHub" target="_blank" rel="noopener noreferrer" className="hover:text-gray-300">
+          <FaGithub size={24} />
         </a>
-        <a href="mailto:YOUR_EMAIL@example.com" aria-label="Email">
-          <FaEnvelope className="text-2xl hover:text-gray-500" />
+        <a href="mailto:samira.moa.app@gmail.com" aria-label="Email" className="hover:text-gray-300">
+          <FaEnvelope size={24} />
         </a>
-        <a href="https://www.linkedin.com/in/YOUR_LINKEDIN_PROFILE" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-          <FaLinkedin className="text-2xl hover:text-gray-500" />
+        <a href="https://www.linkedin.com/in/samira-moa-79a977131" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"className="hover:text-gray-300">
+          <FaLinkedin size={24} />
         </a>
       </div>
+      </div>
 
-      <p className="text-center text-sm mt-4">&copy; {new Date().getFullYear()} Book Explorer. All rights reserved.</p>
-    </footer>
+      <p className="text-center text-gray-400 text-sm mt-4">&copy; {new Date().getFullYear()} Samira Moa. All rights reserved.</p>
+      <ScrollToTopButton /></footer>
   );
 };
 

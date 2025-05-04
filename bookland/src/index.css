@@ -4,3 +4,31 @@
 
 
 
+:root {
+    --color-primary:    #39463C;
+    --color-secondary:  #a7ad93;
+    --color-accentlight:  #e9dcca;
+    --color-accent:     #ebe9e8;
+    --color-bg:         #E5DED8;
+    --color-text-dark:  #2D2D2D;
+    --color-button:     #168f0b;
+  }
+  
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text-dark);
+    font-family: 'Nunito Sans', sans-serif;
+    background: linear-gradient(-45deg,
+    var(--color-primary),
+    var(--color-secondary),
+    var(--color-accent),
+    var(--color-bg)
+  );
+  background-size: 600% 600%;
+  animation: gradient-bg 30s ease infinite;
+}
+@keyframes gradient-bg {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}

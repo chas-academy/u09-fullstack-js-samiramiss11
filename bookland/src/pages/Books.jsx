@@ -1,66 +1,124 @@
-import React from 'react';
+// src/pages/Books.jsx
+import React, { useState, useEffect, useContext } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { FaHeart } from 'react-icons/fa'; // Import the heart icon
+import { FaHeart, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import API    from '../utils/api';
+import AuthContext from '../context/AuthContext';
 
 const Books = () => {
-  // Placeholder data for literary genres and their books
-  const literaryGenres = [
-    {
-      genre: "Fantasy",
-      books: [
-        { name: "Book 1", year: "2001", writer: "Writer 1", style: "Epic", imageUrl: "https://via.placeholder.com/100" },
-        { name: "Book 2", year: "2003", writer: "Writer 2", style: "High Fantasy", imageUrl: "https://via.placeholder.com/100" },
-      ],
-    },
-    {
-      genre: "Science Fiction",
-      books: [
-        { name: "Book 3", year: "1995", writer: "Writer 3", style: "Dystopian", imageUrl: "https://via.placeholder.com/100" },
-        { name: "Book 4", year: "2010", writer: "Writer 4", style: "Space Opera", imageUrl: "https://via.placeholder.com/100" },
-      ],
-    },
-    // Add more genres and books as needed
-  ];
+  const { id }      = useParams();
+  const { user, addSavedContent } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const [query, setQuery]         = useState('psychology');
+  const [books, setBooks]         = useState([]);
+  const [loading, setLoading]     = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const booksPerPage = 15;
+
+    // My helper to truncate long titles to 5 words
+    const truncateTitle = (title, maxWords = 4) => {
+      const words = title.split(/\s+/);
+      return words.length > maxWords
+        ? words.slice(0, maxWords).join(' ') + '…'
+        : title;
+    };
+
+    // handler that checks auth
+  const handleSave = (book) => {
+    if (!user) {
+      // not logged in → redirect them
+      navigate('/login', { replace: true });
+    } else {
+      addSavedContent({
+        type:   'Book',
+        itemId: book.id,
+        title:  book.title,
+        link:   `/book/${book.id}`,
+      });
+    }
+  };
+    useEffect(() => {
+      (async () => {
+        setLoading(true);
+        try {
+          const results = await API.fetchBooksFromGoogle(query);
+          setBooks(results);
+          setCurrentPage(1);
+        } finally {
+          setLoading(false);
+        }
+      })();
+    }, [query]);
+
+  // Calculate pagination
+  const totalPages = Math.ceil(books.length / booksPerPage);
+  const startIdx   = (currentPage - 1) * booksPerPage;
+  const pageBooks  = books.slice(startIdx, startIdx + booksPerPage);
 
   return (
-    <div><Header/>
-    <div className="p-4">
-      <h1 className="text-2xl font-bold text-center mb-6">Books</h1>
-
-      {/* Map through literary genres */}
-      {literaryGenres.map((genre, index) => (
-        <div key={index} className="mb-6">
-          <h2 className="text-xl font-semibold mb-4">{genre.genre}</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {genre.books.map((book, bookIndex) => (
-              <div
-                key={bookIndex}
-                className="relative bg-white rounded-lg shadow-md p-4 text-center cursor-pointer"
-              >
-                {/* Heart icon positioned at the top-right */}
-                <FaHeart className="absolute top-2 right-2 text-gray-400 hover:text-teal-500 cursor-pointer text-lg" />
-
-                <Link to={`/book/${book.name}`}>
-                  <img
-                    src={book.imageUrl}
-                    alt={book.name}
-                    className="rounded-lg w-24 h-24 mx-auto mb-2"
-                  />
-                  <h3 className="font-bold">{book.name}</h3>
-                  <p className="text-gray-600">{book.year}</p>
-                  <p className="text-gray-600">{book.writer}</p>
-                  <p className="text-gray-600">{book.style}</p>
-                </Link>
-              </div>
-            ))}
-          </div>
+    <div>
+      <Header />
+      <div className="p-4 mx-4 sm:mx-10">
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-2xl font-bold">Books on “{query}”</h2>
+          <input
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search books…"
+            className="p-2 border rounded w-28"
+          />
         </div>
-      ))}
-    
-    </div>
-    <Footer/>
+
+        {loading ? (
+          <p>Loading…</p>
+        ) : (
+          <>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 ">
+              {pageBooks.map((book) => (
+                <div key={book.id}
+                     className="relative bg-slate-100 rounded-lg shadow-md p-4 text-center border border-slate-400">
+      <FaHeart size={24} className="absolute top-4 right-4 text-gray-400 hover:text-teal-500 cursor-pointer text-lg"
+         onClick={() => handleSave(book)}/> 
+                 <Link to={`/book/${book.id}`}>
+                    <img src={book.imageUrl} alt={book.title}
+                         className="rounded-lg w-24 h-32 mx-auto mb-2" />
+                    <h3 className="font-bold">{truncateTitle(book.title)}</h3>
+                    <p className="text-xs text-gray-600">{book.author}</p>
+                    <p className="text-xs text-gray-600">{book.year}</p>
+                  </Link>
+                </div>
+              ))}
+            </div>
+
+            {/* Pagination Controls */}
+            <div className="flex justify-center items-center mt-6 space-x-4">
+              <button
+                onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
+                disabled={currentPage === 1}
+                className="p-3 hover:bg-gray-200 rounded-full bg-gray-200 border border-gray-400"
+              >
+                <FaChevronLeft />
+              </button>
+
+              <span >
+                Page {currentPage} of {totalPages}
+              </span>
+
+              <button
+                onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
+                disabled={currentPage === totalPages}
+                className="p-3 hover:bg-gray-200 rounded-full bg-gray-200 border border-gray-400"
+              >
+                <FaChevronRight />
+              </button>
+            </div>
+          </>
+        )}
+      </div>
+      <Footer />
     </div>
   );
 };
