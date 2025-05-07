@@ -1,15 +1,37 @@
-import React from 'react';
+import { useNavigate }   from 'react-router-dom';
+import { FaBookmark  }       from 'react-icons/fa';
+import AuthContext       from '../context/AuthContext';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import React, { useContext, useState } from 'react';
 
 const Theories = () => {
-  return (
+  const navigate = useNavigate();
+  const { user, addSavedContent } = useContext(AuthContext);
+  const [flash, setFlash] = useState('');
+
+  const handleSavePage = () => {
+    if (!user) {
+      return navigate('/login', { replace: true })
+    }
+    addSavedContent({
+      type:   'Page',
+      itemId: 'theories',
+      title:  'Famous Psychological Theories',
+      link:   '/theories',
+    });
+        // show flash
+        setFlash('Page saved!');
+        setTimeout(() => setFlash(''), 2000);
+      };
+
+    return (
     <main className="min-h-screen font-sans antialiased bg-white text-gray-700">
       <Header />
 
       {/* Hero */}
       <section
-  className="relative min-h-[70vh] sm:min-h-[70vh] bg-center bg-cover mx-auto mb-6"
+  className="relative min-h-[70vh] sm:min-h-[70vh] bg-center bg-cover mx-auto"
   style={{ backgroundImage: "url('/images/5Psychologists.jpeg')" }}
 >
   {/* dark overlay + flex layout */}
@@ -21,7 +43,7 @@ const Theories = () => {
       sm:items-start       /* align top on row */
       sm:space-x-12        /* gutter on row */
     "
-  >
+  >      
     {/* Intro column */}
     <div className="flex-1 space-y-6 p-6 sm:p-16">
       <h1 className="text-3xl sm:text-4xl font-bold text-white text-center sm:text-left">
@@ -36,8 +58,8 @@ const Theories = () => {
     </div>
 
     {/* In-page nav */}
-    <div className="group w-full sm:w-2/6 bg-white/60 md:bg-white/20 p-6 rounded-sm mt-8 md:m-16 text-black">
-      <h2 className="text-2xl font-bold mb-4">This Article Contains</h2>
+    <div className="group w-full sm:w-2/6 bg-white/60 md:bg-white/20 p-6 rounded-sm  md:m-16 text-black">
+<h2 className="text-2xl font-bold mb-4">This Article Contains</h2>
       <ul className="space-y-3 font-semibold">
         <li>
           <a href="#maslow" className="hover:underline">Maslow’s Hierarchy</a>
@@ -55,13 +77,22 @@ const Theories = () => {
 
 
       {/* Theories List */}
-      <div className="max-w-6xl mx-auto space-y-12 px-4 sm:px-6 lg:px-0 mb-14">
-        {/* Maslow */}
+      <button onClick={handleSavePage}   title="Bookmark this page"
+  aria-label="Bookmark this page"
+          className="ml-6 right-4 top-2 text-4xl text-primary hover:text-primary-dark" >
+          <FaBookmark />
+        </button><div className="max-w-6xl mx-auto space-y-12 px-4 sm:px-6 lg:px-0 mb-14 mt-2">
+             {/* Flash message */}
+      {flash && (
+        <div className="fixed bottom-8 right-8 bg-primary text-white px-4 py-2 rounded-lg shadow-lg animate-fade-in-out z-50">
+          {flash}
+        </div>
+      )} {/* Maslow */}
         <section
           id="maslow"
           className="bg-background rounded-lg p-8 md:p-12 hover:shadow-lg transition-shadow"
         >
-          <h2 className="mb-4 text-2xl font-semibold text-gray-800">
+ <h2 className="mb-4 text-2xl font-semibold text-gray-800">
             Maslow’s Hierarchy of Needs
           </h2>
           <p className="text-justify text-gray-800 mb-4">

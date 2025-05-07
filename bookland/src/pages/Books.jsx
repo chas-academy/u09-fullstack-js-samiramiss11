@@ -17,7 +17,8 @@ const Books = () => {
   const [loading, setLoading]     = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const booksPerPage = 15;
-
+  const [flash, setFlash] = useState('');
+  
     // My helper to truncate long titles to 5 words
     const truncateTitle = (title, maxWords = 4) => {
       const words = title.split(/\s+/);
@@ -29,17 +30,18 @@ const Books = () => {
     // handler that checks auth
   const handleSave = (book) => {
     if (!user) {
-      // not logged in → redirect them
-      navigate('/login', { replace: true });
-    } else {
+      return navigate('/login', { replace: true })
+    }
       addSavedContent({
         type:   'Book',
         itemId: book.id,
         title:  book.title,
         link:   `/book/${book.id}`,
-      });
-    }
-  };
+      }); 
+      
+     setFlash('Page saved!');
+     setTimeout(() => setFlash(''), 2000);
+   };
     useEffect(() => {
       (async () => {
         setLoading(true);
@@ -82,6 +84,11 @@ const Books = () => {
                      className="relative bg-slate-100 rounded-lg shadow-md p-4 text-center border border-slate-400">
       <FaHeart size={24} className="absolute top-4 right-4 text-gray-400 hover:text-teal-500 cursor-pointer text-lg"
          onClick={() => handleSave(book)}/> 
+                               {/* Flash message */}
+      {flash && (
+        <div className="fixed bottom-8 right-8 bg-primary text-white px-4 py-2 rounded-lg shadow-lg animate-fade-in-out z-50">
+          {flash}
+        </div>)}
                  <Link to={`/book/${book.id}`}>
                     <img src={book.imageUrl} alt={book.title}
                          className="rounded-lg w-24 h-32 mx-auto mb-2" />

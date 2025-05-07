@@ -65,7 +65,7 @@ const Header = () => {
                 )}
               </li>
               <li><Link to="/books" className="hover:text-white block px-4 py-2 hover:bg-primary cursor-pointer">Books</Link></li>
-              <li><Link to="/news" className="block px-4 py-2 hover:bg-gray-100">Quiz & Quote</Link></li>
+              <li><Link to="/QuizAndQuote" className="block px-4 py-2 hover:bg-gray-100">Quiz & Quote</Link></li>
           {/* ———  MOBILE‐ONLY USER LINKS  ——— */}
           {!user && (
             <li className="md:hidden border-t">
@@ -100,7 +100,7 @@ const Header = () => {
       {/* ─── Center Zone ─── */}
       <div className="absolute pr-4 left-1/2 transform -translate-x-1/2 order-2">
         <Link to="/">
-          <img src="/Brains.png" alt="Brain Logo" className="h-26 w-32" />
+          <img src="/images/Brains.png" alt="Brain Logo" className="h-26 w-32" />
         </Link>
       </div>
 

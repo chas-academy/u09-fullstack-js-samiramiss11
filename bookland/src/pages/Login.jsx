@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import API from '../utils/api';
+import React, { useState, useContext } from 'react';
+import AuthContext from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
@@ -12,43 +13,38 @@ const Login = () => {
   const [registerEmail, setRegisterEmail] = useState('');
   const [registerPassword, setRegisterPassword] = useState('');
   const navigate = useNavigate();
+  const { setUser } = useContext(AuthContext);
 
-  const handleLogin = async (e) => {
+  const handleLogin = async e => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/users/login', {
-        email: loginEmail,
-        password: loginPassword,
-      });
-
-      localStorage.setItem('token', response.data.token);
-      localStorage.setItem('user', JSON.stringify(response.data.user));
-
-      if (response.data.user.isAdmin) {
-        navigate('/admin-dashboard');
-      } else {
-        navigate('/user-dashboard');
-      }
-    } catch (error) {
-      console.error('Login error:', error);
-      alert(error.response?.data.message || 'Login failed');
+      const { token, user } = await API.loginUser(loginEmail, loginPassword);
+      localStorage.setItem('token', token);
+      localStorage.setItem('user', JSON.stringify(user));
+      setUser(user);
+      navigate(user.isAdmin ? '/admin-dashboard' : '/user-dashboard');
+    } catch (err) {
+      alert(err.response?.data?.message || 'Login failed');
     }
   };
 
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/api/users/signup', {
-        name: registerName,
-        email: registerEmail,
-        password: registerPassword,
-      });
-
-      alert('Registration successful! Please log in.');
-      setActiveTab(0);
-    } catch (error) {
-      console.error('Signup error:', error);
-      alert(error.response?.data.message || 'Registration failed');
+      // use the API helper here
+      const { token, user } = await API.registerUser(
+        registerName,
+        registerEmail,
+        registerPassword
+      );
+   
+      localStorage.setItem('token', token);
+      localStorage.setItem('user', JSON.stringify(user));
+      setUser(user);
+      navigate(user.isAdmin ? '/admin-dashboard' : '/user-dashboard');
+    } catch (err) {
+      console.error('Signup error:', err);
+      alert(err.response?.data?.message || 'Registration failed');
     }
   };
 

@@ -83,8 +83,8 @@ const Footer = () => {
         <div>
           <h2 className="text-lg font-bold mb-2">Explore More</h2>
           <ul className="space-y-1 text-gray-300">
-            <li><Link to="/news" className="hover:underline">Quiz & Quote</Link></li>
-            <li><Link to="/news" className="hover:underline">Behavior Exercises</Link></li>
+            <li><Link to="/QuizAndQuote" className="hover:underline">Quiz & Quote</Link></li>
+            <li><Link to="/QuizAndQuote" className="hover:underline">Behavior Exercises</Link></li>
             <li><Link to="/books" className="hover:underline">Recommended Books</Link></li>
           </ul>
         </div>

@@ -1,5 +1,6 @@
-// src/pages/QuizAndQuote.jsx
-import React, { useEffect, useState } from 'react';
+import { useNavigate }   from 'react-router-dom';
+import AuthContext       from '../context/AuthContext';
+import React, { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -12,6 +13,7 @@ import {
   FaBalanceScale,
   FaLightbulb,
   FaQuoteRight,
+  FaBookmark,
 } from 'react-icons/fa';
 
 const quizzes = [
@@ -39,6 +41,25 @@ const facts = [
 const QuizAndQuote = () => {
   const [quote, setQuote] = useState('');
   const [fact,  setFact]  = useState('');
+  const [flash, setFlash] = useState('');
+  
+  const navigate = useNavigate();
+  const { user, addSavedContent } = useContext(AuthContext);
+   const handleSavePage = () => {
+    if (!user) {
+      return navigate('/login', { replace: true })
+    }
+    addSavedContent({
+      type:   'Page',
+      itemId: 'QuizAndQuote',
+      title:  'QuizAndQuote',
+      link:   '/QuizAndQuote',
+    })
+    ;
+    // show flash
+    setFlash('Page saved!');
+    setTimeout(() => setFlash(''), 2000);
+  };
 
   useEffect(() => {
     fetch('https://api.adviceslip.com/advice')
@@ -57,32 +78,38 @@ const QuizAndQuote = () => {
     <main className="box-border font-sans antialiased text-gray-700 bg-bg">
       <Header />
 
-      <div className="sm:mx-14 mx-6 px-4 lg:px-0 py-8 space-y-14">
-
-        {/* --- Quiz Section --- */}
-        <section>
-          <h2 className="text-3xl font-bold text-gray-800 mt-8 text-center">
-            Brain Quizzes
-          </h2>
+      <button onClick={handleSavePage}   title="Bookmark this page"
+           aria-label="Bookmark this page"
+                   className="ml-6 right-4 top-2 text-4xl text-primary hover:text-primary-dark" >
+                   <FaBookmark />
+                 </button>
+   {/* Flash message */}
+      {flash && (
+        <div className="fixed bottom-8 right-8 bg-primary text-white px-4 py-2 rounded-lg shadow-lg animate-fade-in-out z-50">
+          {flash}
+        </div>)}
+   {/* --- Quiz Section --- */}     
+        <div className="sm:mx-14 mx-6 px-4 lg:px-0 py-8 space-y-14">
+       <section>
+          <h2 className="text-3xl font-bold text-gray-800 text-center">
+            Brain Quizzes</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-8">
   {quizzes.map(q => (
     <Link
       key={q.id}
       to={q.link}
       className="group flex flex-col items-center p-6 bg-accent border border-primary rounded-lg shadow-sm
-                 hover:bg-secondary hover:shadow-lg hover:border-white transition-shadow"
-    >
+                 hover:bg-secondary hover:shadow-lg hover:border-white transition-shadow">
       {q.icon}
       <h3 className="mt-2 text-xl font-semibold text-gray-800 group-hover:text-white transition-colors">
-        {q.title}
-      </h3>
+        {q.title}</h3>
     </Link>
   ))}
 </div>
         </section>
         {/* --- At-Home Cognitive Exercises --- */}
         <section className="bg-white rounded-lg p-8 md:p-12 hover:shadow-lg transition-shadow">
-          <h2 className="text-3xl font-bold text-gray-800 text-center mb-8">
+ <h2 className="text-3xl font-bold text-gray-800 text-center mb-8">
             DIY Mind & Behavior Exercises
           </h2>
           

@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
 const savedItemSchema = new mongoose.Schema({
-  type: { type: String, enum: ['Book', 'Author'], required: true },
+  type: { type: String, enum: ['Book', 'Author', 'Page'], required: true },
   itemId: { type: String, required: true },
   title: { type: String, required: true },
   link: { type: String, required: true },

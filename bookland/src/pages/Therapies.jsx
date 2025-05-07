@@ -1,15 +1,39 @@
-
-import React from 'react';
+import { useNavigate }   from 'react-router-dom';
+import { FaBookmark  }       from 'react-icons/fa';
+import AuthContext       from '../context/AuthContext';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import React, { useState, useContext } from 'react';
 
-const Therapies = () => (
-   <main className="min-h-screen box-border font-sans antialiased text-gray-700 bg-white">
+const Therapies = () => {
+  const navigate = useNavigate();
+  const { user, addSavedContent } = useContext(AuthContext);
+  const [flash, setFlash] = useState('');  // state for flash message
+  
+  const handleSavePage = () => {
+    if (!user) {
+      return navigate('/login', { replace: true })
+    }
+    addSavedContent({
+      type:   'Page',
+      itemId: 'therapies',
+      title:  'Therapies and Approaches',
+      link:   '/therapies',
+    });
+     // show flash
+     setFlash('Page saved!');
+     // clear after 2s
+     setTimeout(() => setFlash(''), 2000);
+   };
+
+
+    return ( 
+    <main className="min-h-screen box-border font-sans antialiased text-gray-700 bg-white">
     <Header />
       {/* Page Header */}
 
       <section
-  className="relative min-h-[70vh] sm:min-h-[80vh] bg-center bg-cover mx-auto mb-6 p-8"
+  className="relative min-h-[75vh] sm:min-h-[80vh] bg-center bg-cover mx-auto"
   style={{ backgroundImage: "url('/images/therapies.jpeg')" }}
 >
   <div
@@ -32,8 +56,9 @@ const Therapies = () => (
     </div>
 
     {/* In‐page nav: full width on mobile, fixed width on sm+ */}
-    <div className="group w-full sm:h-4/6 sm:w-2/6 bg-white/60 md:bg-white/20 p-6 rounded-sm mt-8  md:m-16 text-black pl-8 ">
-      <h2 className="text-2xl font-bold md:mt-6 mb-4 sm:pt-6">
+    <div className="group w-full sm:h-4/6 sm:w-2/6 bg-white/60 md:bg-white/20 pb-6 pt-4 rounded-sm mt-8  md:m-16 text-black pl-8 ">
+
+             <h2 className="text-2xl font-bold md:mt-6 mb-4 ">
         This Article Contains
       </h2>
       <ul className="space-y-3 md:text-gray-900 font-semibold">
@@ -46,7 +71,16 @@ const Therapies = () => (
 </section>
 
 
-
+      <button onClick={handleSavePage}   title="Bookmark this page"
+         aria-label="Bookmark this page"
+                 className="ml-6 right-4 top-4 text-4xl text-primary hover:text-primary-dark" >
+                 <FaBookmark />
+               </button>
+                      {/* Flash message */}
+      {flash && (
+        <div className="fixed bottom-8 right-8 bg-primary text-white px-4 py-2 rounded-lg shadow-lg animate-fade-in-out z-50">
+          {flash}
+        </div>)}
 <div className="max-w-6xl mx-auto space-y-8 px-4 sm:px-6 lg:px-0 mb-14">
         {/* Behavioral Therapy */}
 <section id="behavioral" className="bg-background rounded-lg p-8 md:p-12 hover:shadow-lg transition-shadow">
@@ -155,5 +189,5 @@ const Therapies = () => (
     <Footer />
   </main>
 );
-
+};
 export default Therapies;

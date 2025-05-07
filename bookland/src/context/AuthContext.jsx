@@ -2,10 +2,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import API from '../utils/api';
 
-
 const AuthContext = createContext();
-
-
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(() => {
     const raw = localStorage.getItem('user');

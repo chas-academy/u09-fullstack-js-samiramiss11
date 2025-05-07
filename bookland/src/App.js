@@ -20,7 +20,7 @@ import TopicCard from './components/TopicCard';
 import BookCard from './components/BookCard';
 import CoreConcepts from './pages/CoreConcepts';
 import Therapies from './pages/Therapies';
-import Theories from './pages/Theories';
+import Theories from './pages/Theories'
 import Methods from './pages/Methods';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsService from './pages/TermsService';
@@ -40,7 +40,7 @@ const App = () => {
     <Route path="/history" element={<History />} />
     <Route path="/books" element={<Books />} />
     <Route path="/book/:id" element={<BookCard />} />
-    <Route path="/news" element={<QuizAndQuote />}/>
+    <Route path="/QuizAndQuote" element={<QuizAndQuote />}/>
     <Route path="/about-us" element={<AboutUs />} />
     <Route path="/contact-us" element={<ContactUs />} />
     <Route path="/search-results" element={<SearchResults />} />

@@ -1,9 +1,30 @@
-// src/pages/Methods.jsx
-import React from 'react';
+import React, {  useState, useContext } from 'react';
+import { useNavigate }   from 'react-router-dom';
+import { FaBookmark  }       from 'react-icons/fa';
+import AuthContext       from '../context/AuthContext';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 const Methods = () => {
+  const navigate = useNavigate();
+  const { user, addSavedContent } = useContext(AuthContext);
+  const [flash, setFlash] = useState('');
+  const handleSavePage = () => {
+    if (!user) {
+      return navigate('/login', { replace: true })
+    }
+    addSavedContent({
+      type:   'Page',
+      itemId: 'methods',
+      title:  'Research Methods',
+      link:   '/methods',
+    })
+    ;
+    // show flash
+    setFlash('Page saved!');
+    setTimeout(() => setFlash(''), 2000);
+  };
+
   return (
     <main className="min-h-screen font-sans antialiased bg-white text-gray-700">
       <Header />
@@ -39,9 +60,20 @@ const Methods = () => {
   </div>
 </section>
       {/* Methods List */}
-      <div className="max-w-6xl mx-auto space-y-8 px-4 sm:px-6 lg:px-0 mb-14 mt-8">
+      <button onClick={handleSavePage}   title="Bookmark this page"
+         aria-label="Bookmark this page"
+                 className="ml-6 right-4 top-4 text-4xl text-primary hover:text-primary-dark" >
+                 <FaBookmark />
+               </button>
+     {/* Flash message */}
+      {flash && (
+        <div className="fixed bottom-8 right-8 bg-primary text-white px-4 py-2 rounded-lg shadow-lg animate-fade-in-out z-50">
+          {flash}
+        </div>)}       
+      <div className="max-w-6xl mx-auto space-y-8 px-4 sm:px-6 lg:px-0 mb-14 mt-2">
         {/* Double-Blind Studies */}
-        <section className="bg-background rounded-lg p-8 md:p-12 hover:shadow-lg transition-shadow">
+
+                <section className="bg-background rounded-lg p-8 md:p-12 hover:shadow-lg transition-shadow">
           <h2 className="mb-2 text-2xl font-semibold text-gray-800">
             Double-Blind Studies
           </h2>

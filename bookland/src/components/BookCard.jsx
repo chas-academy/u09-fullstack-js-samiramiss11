@@ -11,6 +11,7 @@ const BookCard = () => {
   const navigate    = useNavigate(); 
   const [book, setBook] = useState(null);
   const { user, addSavedContent } = useContext(AuthContext);
+  const [flash, setFlash] = useState('');
 
   useEffect(() => {
     API.fetchBookDetailFromGoogle(id).then(setBook).catch(console.error);
@@ -30,24 +31,30 @@ const shortDesc = cleanDescription.length > 800
 
 // handler that checks auth
   const handleSave = () => {
-    if (!user) {
-      // not logged in → redirect them
-      navigate('/login', { replace: true });
-    } else {
+ if (!user) {
+      return navigate('/login', { replace: true })
+    }
       addSavedContent({
         type:   'Book',
         itemId: book.id,
         title:  book.title,
         link:   `/book/${book.id}`,
-      });
-    }
-  };
+      }); 
+      
+      setFlash('Page saved!');
+      setTimeout(() => setFlash(''), 2000);
+    };
 
   return (
     <>
       <Header />
       <div className="relative bg-slate-200 border border-slate-400 rounded-lg shadow-md p-8  mx-6 my-8">
-      <FaHeart size={24} className="absolute top-4 right-4 text-gray-400 hover:text-teal-500 cursor-pointer text-lg"
+                                     {/* Flash message */}
+                                     {flash && (
+        <div className="fixed bottom-8 right-8 bg-primary text-white px-4 py-2 rounded-lg shadow-lg animate-fade-in-out z-50">
+          {flash}
+        </div>)}
+        <FaHeart size={24} className="absolute top-4 right-4 text-gray-400 hover:text-teal-500 cursor-pointer text-lg"
          onClick={handleSave}/>        
          <img src={book.imageUrl} alt={book.title}  className="rounded-lg w-38 h-38 mx-auto mb-4" />
         <h2 className="text-xl font-bold text-center">{book.title}</h2>

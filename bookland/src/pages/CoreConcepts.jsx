@@ -1,9 +1,29 @@
-// src/pages/CoreConcepts.jsx
-import React from 'react';
+import React, { useState, useContext } from 'react';
+import { useNavigate }   from 'react-router-dom';
+import { FaBookmark  }       from 'react-icons/fa';
+import AuthContext       from '../context/AuthContext';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
 const CoreConcepts = () => {
+  const navigate = useNavigate();
+  const { user, addSavedContent } = useContext(AuthContext);
+  const [flash, setFlash] = useState('');
+  const handleSavePage = () => {
+    if (!user) {
+      return navigate('/login', { replace: true })
+    }
+    addSavedContent({
+      type:   'Page',
+      itemId: 'Therapy?',
+      title:  'Do I Need Therapy?',
+      link:   '/core-concepts',
+    });
+    setFlash('Page saved!');
+    setTimeout(() => setFlash(''), 2000);
+  };
+
+
   return (
     <main className="min-h-screen box-border font-sans antialiased text-gray-700 bg-white">
       <Header />
@@ -36,11 +56,20 @@ const CoreConcepts = () => {
     {/* for now we'll just keep it blank to balance the layout */}
     <div className="hidden sm:block sm:w-2/6" />
   </div>
-</section>
-
+</section>                      {/* Flash message */}
+      {flash && (
+        <div className="fixed bottom-8 right-8 bg-primary text-white px-4 py-2 rounded-lg shadow-lg animate-fade-in-out z-50">
+          {flash}
+        </div>)}
+<button onClick={handleSavePage}   title="Bookmark this page"
+  aria-label="Bookmark this page"
+          className="ml-6 right-4 top-4 text-4xl text-primary hover:text-primary-dark" >
+          <FaBookmark />
+        </button>
       {/* Therapy Guidance Section */}
-      <section className="max-w-6xl mx-auto bg-accent p-8 md:p-12 mb-8 rounded-lg shadow-sm mt-8">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-4">
+      <section className="max-w-6xl mx-auto bg-accent p-8 md:p-12 mb-8 rounded-lg shadow-sm mt-2">
+
+        <h2 className="text-2xl font-semibold text-gray-800 mb-4 pt-4">
           How Do I Know if I Need Therapy?
         </h2>
         <div className="space-y-4 text-gray-600 text-justify">

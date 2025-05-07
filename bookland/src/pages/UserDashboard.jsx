@@ -79,7 +79,7 @@ const UserDashboard = () => {
             }`}
             onClick={() => setActiveTab('saved')}
           >
-            Saved Content
+            Saved Books
           </button>
         </div>
 
@@ -112,7 +112,7 @@ const UserDashboard = () => {
           {/* Saved Content Tab */}
           {activeTab === 'saved' && (
             <div>
-              <h2 className="text-2xl font-bold mb-4">Saved Content</h2>
+              <h2 className="text-2xl font-bold mb-4">Saved Books</h2>
               {savedContent.length > 0 ? (
                 <ul className="space-y-4">
                   {savedContent.map((item) => (
