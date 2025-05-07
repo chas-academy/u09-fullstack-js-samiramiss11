@@ -5,9 +5,11 @@ node_modules/
 dist/
 build/
 
-# local env  
+# local env
 .env
 
 # logs & coverage
 *.log
 coverage/
+# Environment variables
+.env
