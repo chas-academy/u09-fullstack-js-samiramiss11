@@ -6,6 +6,8 @@ node_modules/
 
 # ignore any env files
 *.env
+# local env variables
+.env
 
 # log files
 npm-debug.log*
