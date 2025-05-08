@@ -1,0 +1,13 @@
+{
+    "name": "neuro-nexus",
+    "version": "1.0.0",
+    "engines": {
+      "node": ">=16"
+    },
+    "scripts": {
+      "start": "npm run start --prefix server",
+      "heroku-postbuild": "npm install --prefix bookland && npm run build --prefix bookland"
+    },
+    "dependencies": {}
+  }
+  
