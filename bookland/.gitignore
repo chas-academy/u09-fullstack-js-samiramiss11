@@ -11,6 +11,8 @@
 
 # local env
 .env
+# dotenv
+.env
 
 # testing
 *.log

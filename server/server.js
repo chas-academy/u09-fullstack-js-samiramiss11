@@ -1,40 +1,45 @@
+/* eslint-disable no-unused-vars */
+// server/server.js
 const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const connectDB = require('./config/db');
+const errorHandler = require('./middleware/errorMiddleware');
 
 dotenv.config();
-connectDB(); // Connect Database
+connectDB();
 
 const app = express();
+
+// Built-in body parser
 app.use(express.json());
+
+// Enable CORS for all origins (tweak in production!)
 app.use(cors());
 
-// Auth / User routes
-const userRoutes = require('./routes/userRoutes');
+// Public routes
+app.use('/api/users', require('./routes/userRoutes'));
+app.use('/api/search', require('./routes/searchRoutes'));
+app.use('/api/news', require('./routes/newsRoutes'));
+app.use('/api/quiz', require('./routes/quizRoutes'));
+app.use('/api/contact', require('./routes/contactRoutes'));
 
-app.use('/api/users', userRoutes);
+// Protected / user-specific
+app.use('/api/users/me/saved', require('./routes/savedContentRoutes'));
 
-// Search routes
-const searchRoutes = require('./routes/searchRoutes');
+// Admin routes (assumes your authMiddleware on those controllers)
+app.use('/api/admin/users', require('./routes/adminRoutes'));
+app.use('/api/admin/content', require('./routes/contentRoutes'));
 
-app.use('/api/search', searchRoutes);
+// 404 for any other route
+app.use((req, res, next) => {
+  res.status(404).json({ message: `Route ${req.method} ${req.originalUrl} not found` });
+});
 
-const savedRoutes = require('./routes/savedContentRoutes');
-
-app.use('/api/users/me/saved', savedRoutes);
-
-const contentRoutes = require('./routes/contentRoutes');
-
-app.use('/api/admin/content', contentRoutes);
-
-const adminRoutes = require('./routes/adminRoutes');
-
-app.use('/api/admin', adminRoutes);
-
-const contactRoutes = require('./routes/contactRoutes');
-
-app.use('/api/contact', contactRoutes);
+// Central error handler
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on http://localhost:${PORT}`);
+});
