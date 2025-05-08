@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-vars */
 // server/server.js
-require('express-async-errors'); // <== auto-catch async errors
 const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
