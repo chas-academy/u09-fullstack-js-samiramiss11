@@ -1,13 +1,15 @@
 {
-    "name": "neuro-nexus",
+    "name": "neuro-nexus-app",
     "version": "1.0.0",
     "engines": {
-      "node": ">=16"
+        "node": ">=16",
+        "npm": "8.x"
     },
     "scripts": {
-      "start": "npm run start --prefix server",
-      "heroku-postbuild": "npm install --prefix bookland && npm run build --prefix bookland"
+        "start": "npm run start --prefix server",
+        "heroku-postbuild": "npm install --prefix bookland && npm run build --prefix bookland"
     },
-    "dependencies": {}
-  }
-  
+    "devDependencies": {
+        "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+    }
+}
