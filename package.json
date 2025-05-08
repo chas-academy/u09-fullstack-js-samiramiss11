@@ -2,14 +2,19 @@
     "name": "neuro-nexus-app",
     "version": "1.0.0",
     "engines": {
-        "node": "18.x",
-        "npm": "8.x"
+      "node": "18.x",
+      "npm": "8.x"
     },
     "scripts": {
-        "start": "npm run start --prefix server",
-        "heroku-postbuild": "npm install --prefix bookland && npm run build --prefix bookland"
+      "start": "node server/server.js",
+  
+      "heroku-postbuild": "npm install --prefix bookland && npm run build --prefix bookland"
+    },
+    "dependencies": {
+   
     },
     "devDependencies": {
-        "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+      "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
     }
-}
+  }
+  
