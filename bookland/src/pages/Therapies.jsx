@@ -1,193 +1,109 @@
-import { useNavigate }   from 'react-router-dom';
-import { FaBookmark  }       from 'react-icons/fa';
-import AuthContext       from '../context/AuthContext';
+import React, { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { FaBookmark } from 'react-icons/fa';
+import AuthContext from '../context/AuthContext';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import React, { useState, useContext } from 'react';
 
-const Therapies = () => {
+const Methods = () => {
   const navigate = useNavigate();
   const { user, addSavedContent } = useContext(AuthContext);
-  const [flash, setFlash] = useState('');  // state for flash message
-  
+  const [flash, setFlash] = useState('');
   const handleSavePage = () => {
     if (!user) {
-      return navigate('/login', { replace: true })
+      return navigate('/login', { replace: true });
     }
     addSavedContent({
       type:   'Page',
-      itemId: 'therapies',
-      title:  'Therapies and Approaches',
-      link:   '/therapies',
+      itemId: 'methods',
+      title:  'Research Methods',
+      link:   '/methods',
     });
-     // show flash
-     setFlash('Page saved!');
-     // clear after 2s
-     setTimeout(() => setFlash(''), 2000);
-   };
+    setFlash('Page saved!');
+    setTimeout(() => setFlash(''), 2000);
+  };
 
+  return (
+    <main className="min-h-screen font-sans antialiased bg-white text-gray-700">
+      <Header />
 
-    return ( 
-    <main className="min-h-screen box-border font-sans antialiased text-gray-700 bg-white">
-    <Header />
-      {/* Page Header */}
-
+      {/* Hero */}
       <section
-  className="relative min-h-[75vh] sm:min-h-[80vh] bg-center bg-cover mx-auto"
-  style={{ backgroundImage: "url('/images/therapies.jpeg')" }}
->
-  <div
-    className="
-      absolute inset-0 bg-black/50 
-      flex flex-col       /* mobile: stack */
-      sm:flex-row         /* sm+: row */
-      sm:items-start      /* align top on row */
-      sm:space-x-12       /* gutter on row */
-    "
-  >
-    {/* Intro column */}
-    <div className="flex-1 space-y-6 p-6 sm:p-16">
-      <h1 className="text-3xl sm:text-4xl font-bold text-white text-center sm:text-left sm:pt-8">
-        Therapies and Approaches
-      </h1>
-      <p className="text-lg text-white text-justify">
-      In this section, we explore three key psychotherapy approaches—Cognitive Behavioral Therapy (CBT), Behavioral Therapy, and Psychoanalysis—and how each guides change: CBT reshapes thoughts, Behavioral Therapy modifies actions, and Psychoanalysis uncovers the unconscious forces that drive behavior.
-      </p>
-    </div>
+        className="relative min-h-[35vh] sm:min-h-[80vh] bg-center bg-cover mx-auto p-8"
+        style={{ backgroundImage: "url('/images/methods.jpg')" }}
+      >
+        <div className="absolute inset-0 bg-black/50 flex flex-col sm:flex-row sm:items-center sm:space-x-12">
+          <div className="flex-1 space-y-4 p-6 sm:p-16 mt-8">
+            <h1 className="text-3xl sm:text-4xl font-bold text-white text-center sm:text-left">
+              Research Methods
+            </h1>
+            <p className="text-lg text-white text-center sm:text-left">
+              Learn about the key research designs used in psychology—from gold–standard experiments to in-depth case studies. Psychology relies on a variety of approaches to balance control, generalizability, depth, and ecological validity.
+            </p>
+          </div>
+          <div className="hidden sm:block sm:w-2/6" />
+        </div>
+      </section>
 
-    {/* In‐page nav: full width on mobile, fixed width on sm+ */}
-    <div className="group w-full sm:h-4/6 sm:w-2/6 bg-white/60 md:bg-white/20 pb-6 pt-4 rounded-sm mt-8  md:m-16 text-black pl-8 ">
+      {/* Bookmark */}
+      <button
+        onClick={handleSavePage}
+        title="Bookmark this page"
+        aria-label="Bookmark this page"
+        className="ml-6 right-4 top-4 text-4xl text-primary hover:text-primary-dark"
+      >
+        <FaBookmark />
+      </button>
 
-             <h2 className="text-2xl font-bold md:mt-6 mb-4 ">
-        This Article Contains
-      </h2>
-      <ul className="space-y-3 md:text-gray-900 font-semibold">
-        <li><a href="#cbt" className="hover:underline">Cognitive Behavioral Therapy</a></li>
-        <li><a href="#behavioral" className="hover:underline">Behavioral Therapy</a></li>
-        <li><a href="#psychoanalysis" className="hover:underline">Psychoanalysis</a></li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-
-      <button onClick={handleSavePage}   title="Bookmark this page"
-         aria-label="Bookmark this page"
-                 className="ml-6 right-4 top-4 text-4xl text-primary hover:text-primary-dark" >
-                 <FaBookmark />
-               </button>
-                      {/* Flash message */}
+      {/* Flash */}
       {flash && (
         <div className="fixed bottom-8 right-8 bg-primary text-white px-4 py-2 rounded-lg shadow-lg animate-fade-in-out z-50">
           {flash}
-        </div>)}
-<div className="max-w-6xl mx-auto space-y-8 px-4 sm:px-6 lg:px-0 mb-14">
-        {/* Behavioral Therapy */}
-<section id="behavioral" className="bg-background rounded-lg p-8 md:p-12 hover:shadow-lg transition-shadow">
-  <h2 className="text-2xl font-semibold text-gray-800 md:m-6 pb-4">
-    Behavioral Therapy
-  </h2>
+        </div>
+      )}
 
-  {/* Main description */}
-  <p className="text-justify text-gray-600 ">
-    Behavioral therapy is based on behaviorism, emphasizing learned responses to environmental stimuli.
-    This therapy aims to modify behavior by changing the external environment and teaching new coping skills.
-    Behavioral therapy focuses on identifying and changing problematic behaviors that negatively impact a person’s life.
-    Complex behaviors could include a range of conducts, from unhealthy eating habits to excessive alcohol consumption.
-  </p>
-
-  <p className="text-justify text-gray-600 md:m-12">
-    With behavioral therapy, the therapist and the client work together to develop a plan of action, set goals, and identify 
-    the behaviors that need to be changed. Behavioral therapy typically involves exposure therapy, desensitization, 
-    and positive reinforcement.
-  </p>
-
-  {/* Key techniques as a list */}
-  <ul className="list-disc list-inside space-y-1 text-gray-600 md:m-12">
-    <li>
-      <strong>Positive reinforcement</strong> involves rewarding positive behaviors and ignoring negative behaviors.
-    </li>
-    <li>
-      <strong>Exposure therapy</strong> involves gradually exposing the client to the anxiety-inducing situation in a safe 
-      and controlled environment.
-    </li>
-    <li>
-      <strong>Desensitization</strong> progressively involves exposing the client to a feared stimulus until they become 
-      desensitized.
-    </li>
-  </ul>
-</section>
-{/* CBT Section */}
-<section id="cbt" className="bg-accent rounded-lg p-8 md:p-12 hover:shadow-lg transition-shadow">
-          <h2 className="text-2xl font-semibold text-gray-800 md:m-6 pb-4">
-            Cognitive Behavioral Therapy (CBT)
+      {/* Methods List */}
+      <div className="max-w-6xl mx-auto space-y-8 px-4 sm:px-6 lg:px-0 mb-14 mt-2">
+        {/* Double-Blind Studies */}
+        <section className="bg-background rounded-lg p-8 md:p-12 hover:shadow-lg transition-shadow">
+          <h2 className="mb-2 text-2xl font-semibold text-gray-800">
+            Double-Blind Studies
           </h2>
-          <div className="text-justify space-y-4 max-h-[60vh] overflow-y-auto pr-2 ">
-            <p>
-            Cognitive behavioral therapy (CBT) is a form of psychological treatment that has been demonstrated to be effective for a range of problems including depression, anxiety disorders, alcohol and drug use problems, marital problems, eating disorders, and severe mental illness. Numerous research studies suggest that CBT leads to significant improvement in functioning and quality of life. In many studies, CBT has been demonstrated to be as effective as, or more effective than, other forms of psychological therapy or psychiatric medications.
-            </p>
-            
-            <p>
-            It is important to emphasize that advances in CBT have been made on the basis of both research and clinical practice. Indeed, CBT is an approach for which there is ample scientific evidence that the methods that have been developed actually produce change. In this manner, CBT differs from many other forms of psychological treatment.
-            </p>
-            <p>
-            </p>
-            <p className='font-semibold'>CBT is based on several core principles, including:</p>
-            <ol className="list-decimal list-inside space-y-1">
-              <li>Psychological problems are based, in part, on faulty or unhelpful ways of thinking.</li>
-              <li>Psychological problems are based, in part, on learned patterns of unhelpful behavior.</li>
-              <li>People suffering from psychological problems can learn better ways of coping with them, thereby relieving their symptoms and becoming more effective in their lives.</li>
-            </ol>
-            <p>CBT treatment usually involves efforts to change thinking patterns. These strategies might include:</p>
-            <ul className="list-disc list-inside space-y-1">
-              <li>Learning to recognize one’s distortions in thinking …</li>
-              <li>Gaining a better understanding of the behavior …</li>
-              <li>Using problem-solving skills to cope …</li>
-            </ul>
-            <p>CBT treatment also usually involves efforts to change behavioral patterns. These strategies might include:</p>
-            <ul className="list-disc list-inside space-y-1">
-              <li>Facing one’s fears instead of avoiding them.</li>
-              <li>Using role playing to prepare …</li>
-              <li>Learning to calm one’s mind and relax one’s body.</li>
-            </ul>
-            <p>Not all CBT will use all of these strategies. Rather, the psychologist and patient/client work together, in a collaborative fashion, to develop an understanding of the problem and to develop a treatment strategy.</p>
-            <p>CBT places an emphasis on helping individuals learn to be their own therapists. Through exercises in the session as well as “homework” exercises outside of sessions, patients/clients are helped to develop coping skills, whereby they can learn to change their own thinking, problematic emotions, and behavior.</p>
-            <p>CBT therapists emphasize what is going on in the person’s current life, rather than what has led up to their difficulties. A certain amount of information about one’s history is needed, but the focus is primarily on moving forward in time to develop more effective ways of coping with life.</p>
-            <p className="text-sm text-gray-500">
-              Source: APA Div. 12 (Society of Clinical Psychology), 
-              American Psychological Association (APA)
-            </p>
-          </div>
-</section>
+          <p className="text-justify text-gray-600 mt-2">
+            Double-blind studies are experiments where neither participants nor researchers know who receives the active treatment versus a placebo. By concealing allocation until after data collection, this design neutralizes expectation effects—participants behaving as they think they “should”—and observer bias—researchers unconsciously recording data to fit hypotheses.
+          </p>
+          <p className="text-justify text-gray-600 mt-4">
+            Commonly used in clinical trials (e.g. testing new medications), double-blind protocols ensure that outcome differences reflect the intervention’s true efficacy rather than subtle cues or wishful thinking from either side. They’re considered the gold standard for establishing causal relationships in treatment research.
+          </p>
+          <p className="text-sm text-gray-500 mt-4">
+            <strong>References:</strong><br/>
+            Beecher (1955), “The Powerful Placebo”;<br/>
+            Schulz & Grimes (2002), “Generation of Allocation Sequences in Randomised Trials”
+          </p>
+        </section>
 
-        {/* Two-column grid for the shorter sections */}
-        <section id="psychoanalysis" className="bg-secondary p-8 md:p-16 rounded-lg hover:shadow-lg transition-shadow">
-  <h2 className="text-2xl font-semibold text-gray-800 mb-2">Psychoanalysis</h2>
-  <p className="text-justify text-gray-800 mb-4">
-    Founded by Sigmund Freud in the late 19th century (first clinic opened 1886), psychoanalysis posits that much of our mental life occurs outside conscious awareness.  
-    By bringing unconscious conflicts and defense mechanisms into consciousness through techniques such as free association, dream interpretation, and transference analysis,  
-    the patient can gain insight into the root causes of distressing thoughts and behaviors.  
-    Over the decades, Freud’s ideas were extended by figures like Carl Jung (collective unconscious, 1916) and Melanie Klein (object relations, 1932),  
-    giving rise to multiple “schools” of psychodynamic therapy that remain influential in today’s clinical practice.
-  </p>
-  <ul className="list-disc list-inside text-gray-800 mb-4">
-    <li><strong>Free Association:</strong> Encouraging patients to verbalize all thoughts without censorship.</li>
-    <li><strong>Dream Analysis:</strong> Interpreting manifest and latent content to reveal hidden wishes.</li>
-    <li><strong>Transference:</strong> Examining how feelings about past figures are unconsciously projected onto the therapist.</li>
-    <li><strong>Interpretation:</strong> Therapist-guided insights into defenses and unconscious patterns.</li>
-  </ul>
-  <p className="text-sm text-gray-500">
-    <strong>References:</strong><br/>
-    Freud, S. (1900). <em>The Interpretation of Dreams</em>. Macmillan.<br/>
-    Jung, C. G. (1916). <em>Psychological Types</em>. Collected Works.<br/>
-    Klein, M. (1932). “The Psycho-Analysis of Children.” <em>International Journal of Psycho-Analysis</em>.<br/>
-    Fonagy, P., & Target, M. (2003). “Psychoanalytic Theories.” In <em>Cognitive-Behavioral and Psychodynamic Interventions</em>.
-  </p>
-</section>
-</div>
+        {/* Surveys & Case Studies */}
+        <section className="bg-accent rounded-lg p-8 md:p-12 hover:shadow-lg transition-shadow">
+          <h2 className="mb-2 text-2xl font-semibold text-gray-800">
+            Surveys & Case Studies
+          </h2>
+          <p className="text-justify text-gray-600 mt-2">
+            Surveys employ standardized questionnaires or structured interviews to collect data from large, often representative samples. By asking the same questions of hundreds or thousands of respondents, researchers can quantify attitudes, beliefs, and self-reported behaviors, then apply statistical techniques—like factor analysis or regression—to uncover patterns and predictors.
+          </p>
+          <p className="text-justify text-gray-600 mt-4">
+            Case studies involve intensive, in-depth examination of a single individual, family, or small group—frequently in contexts where a rare condition or unique phenomenon arises. Through interviews, observations, archival records, and testing, case studies generate rich qualitative (and sometimes quantitative) data, making them invaluable for hypothesis generation, theory refinement, and teaching.
+          </p>
+          <p className="text-sm text-gray-500 mt-4">
+            <strong>References:</strong><br/>
+            Likert (1932), “A Technique for the Measurement of Attitudes”;<br/>
+            Yin (2014), <em>Case Study Research: Design and Methods</em>
+          </p>
+        </section>
+      </div>
 
-    <Footer />
-  </main>
-);
+      <Footer />
+    </main>
+  );
 };
-export default Therapies;
+
+export default Methods;

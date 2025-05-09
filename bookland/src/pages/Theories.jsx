@@ -58,7 +58,7 @@ const Theories = () => {
     </div>
 
     {/* In-page nav */}
-    <div className="group w-full sm:w-2/6 bg-white/60 md:bg-white/20 p-6 rounded-sm  md:m-16 text-black">
+    <div className="hidden md:block group md:w-2/6 bg-white/60 md:bg-white/20 p-6 rounded-sm mt-8 md:m-16 text-black">
 <h2 className="text-2xl font-bold mb-4">This Article Contains</h2>
       <ul className="space-y-3 font-semibold">
         <li>
