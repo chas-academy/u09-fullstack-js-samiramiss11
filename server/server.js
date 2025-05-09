@@ -1,3 +1,5 @@
+/* eslint-disable consistent-return */
+/* eslint-disable global-require */
 const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
@@ -11,8 +13,8 @@ app.use(express.json());
 
 const WHITELIST = [
   process.env.NODE_ENV === 'production'
-    ? process.env.FRONTEND_URL      
-    : 'http://localhost:3000'
+    ? process.env.FRONTEND_URL
+    : 'http://localhost:3000',
 ];
 app.use(cors({
   origin: (origin, cb) => {
@@ -20,7 +22,7 @@ app.use(cors({
     if (!origin) return cb(null, true);
     if (WHITELIST.includes(origin)) return cb(null, true);
     cb(new Error(`CORS policy: Origin ${origin} not allowed`));
-  }
+  },
 }));
 
 // Auth / User routes
@@ -50,12 +52,12 @@ const contactRoutes = require('./routes/contactRoutes');
 app.use('/api/contact', contactRoutes);
 
 if (process.env.NODE_ENV === 'production') {
-  const path = require('path')
+  const path = require('path');
   // Serve React’s index.html for any non-API route
-  app.use(express.static(path.join(__dirname, '../bookland/build')))
+  app.use(express.static(path.join(__dirname, '../bookland/build')));
   app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../bookland/build', 'index.html'))
-  })
+    res.sendFile(path.join(__dirname, '../bookland/build', 'index.html'));
+  });
 }
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
