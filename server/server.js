@@ -14,8 +14,7 @@ app.use(express.json());
 const WHITELIST = [
   process.env.NODE_ENV === 'production'
     ? process.env.FRONTEND_URL
-    : 'http://localhost:3000',
-];
+    : 'http://localhost:3000', 'http://localhost:5000'];
 app.use(cors({
   origin: (origin, cb) => {
     // Allow requests with no origin (mobile apps, curl, postman)
