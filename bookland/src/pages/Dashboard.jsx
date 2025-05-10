@@ -6,7 +6,7 @@ import UserDashboard  from './UserDashboard';
 
 const  Dashboard= () => {
   const { user } = useContext(AuthContext);
-  // If for any reason user is not defined, you could redirect to login here
+  
   return user?.isAdmin
     ? <AdminDashboard />
     : <UserDashboard />;

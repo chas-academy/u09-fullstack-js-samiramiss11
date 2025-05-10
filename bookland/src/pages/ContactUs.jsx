@@ -13,7 +13,7 @@ const ContactUs = () => {
 
     try {
       // 1) send the payload
-      const result = await sendContact({ name, email, message });
+      await sendContact({ name, email, message });
       alert('Thanks — your message has been sent!');
       setName(''); setEmail(''); setMessage('');
     } catch (err) {

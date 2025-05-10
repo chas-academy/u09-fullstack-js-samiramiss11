@@ -12,7 +12,7 @@ export default function SearchResults() {
 
   let matches = [];
   if (q) {
-    const re = new RegExp(q.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'), 'i');
+    const re = new RegExp(q.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&'), 'i');
     matches = PAGES.filter(({ title, slug, body }) =>
       re.test(title) || re.test(slug) || re.test(body)
     );

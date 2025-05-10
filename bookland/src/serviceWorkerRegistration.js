@@ -1,4 +1,3 @@
-import { Workbox } from 'workbox-window';
 export function register() {
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {

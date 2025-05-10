@@ -1,6 +1,6 @@
 // src/pages/Books.jsx
 import React, { useState, useEffect, useContext } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import {useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { FaHeart, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import Header from '../components/Header';
@@ -9,7 +9,6 @@ import API    from '../utils/api';
 import AuthContext from '../context/AuthContext';
 
 const Books = () => {
-  const { id }      = useParams();
   const { user, addSavedContent } = useContext(AuthContext);
   const navigate = useNavigate();
   const [query, setQuery]         = useState('psychology');

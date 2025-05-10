@@ -1,12 +1,12 @@
 /* eslint-disable react/jsx-no-undef */
-// src/pages/AdminDashboard.jsx
+/* eslint-disable-next-line no-restricted-globals */
 import React, { useState, useEffect } from 'react'
 import ManageContent from './ManageContent'
 import ManageUsers from './ManageUsers'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import API from '../utils/api'
-import AuthContext from '../context/AuthContext';
+/*import AuthContext from '../context/AuthContext';*/
 import { Link } from 'react-router-dom';
 import { fetchSaved, removeSaved } from '../utils/api'
 
@@ -32,7 +32,7 @@ const AdminDashboard = () => {
     d ? new Date(d).toLocaleString() : 'N/A'
 
   const handleDeleteAccount = async () => {
-    if (!confirm('Really delete your own admin account?')) return
+    if (!window.confirm('Really delete your own admin account?')) return
     try {
       await API.deleteUser(userInfo.id, localStorage.getItem('token'))
       localStorage.clear()

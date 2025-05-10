@@ -21,9 +21,6 @@ const Header = () => {
   useClickOutside(topicsRef, () => setTopicsOpen(false));
 
   const toggleNav    = () => setNavOpen(o => !o);
-  const toggleUser   = () => setUserOpen(o => !o);
-  const toggleTopics = () => setTopicsOpen(o => !o);
-
   const handleSignOut = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');

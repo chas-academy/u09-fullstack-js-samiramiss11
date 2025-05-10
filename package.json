@@ -8,7 +8,7 @@
     "scripts": {
       "start": "node server/server.js",
   
-      "heroku-postbuild": "npm install --prefix bookland && npm run build --prefix bookland"
+      "postbuild": "npm install --prefix bookland && npm run build --prefix bookland"
     },
     "dependencies": {
    

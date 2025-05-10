@@ -1,6 +1,6 @@
 // src/pages/ManageUsers.jsx
 import React, { useEffect, useState } from 'react';
-import { fetchUsers, adminUpdateUser, adminDeleteUser } from '../utils/api';
+import { fetchUsers, adminUpdateUser} from '../utils/api';
 
 const ManageUsers = () => {
   const [users, setUsers] = useState([]);
@@ -18,13 +18,6 @@ const ManageUsers = () => {
     const updated = await adminUpdateUser(u._id, { isAdmin: !u.isAdmin });
     setUsers(users.map(x => x._id === u._id ? updated : x));
   };
-
-  const handleDelete = async (u) => {
-    if (!window.confirm(`Really delete ${u.name}?`)) return;
-    await adminDeleteUser(u._id);
-    setUsers(users.filter(x => x._id !== u._id));
-  };
-
 
     return (
       <div>
