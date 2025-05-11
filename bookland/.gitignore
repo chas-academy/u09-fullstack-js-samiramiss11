@@ -11,9 +11,7 @@
 
 # local env
 .env
-# dotenv
-.env
-
+.env.production
 # testing
 *.log
 /coverage
