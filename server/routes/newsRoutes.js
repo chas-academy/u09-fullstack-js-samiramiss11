@@ -1,9 +1,4 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable no-restricted-globals */
-/* eslint-disable linebreak-style */
-/* eslint-disable import/no-unresolved */
-/* eslint-disable linebreak-style */
-// server/routes/newsRoutes.js
+
 const express = require('express');
 const axios = require('axios');
 

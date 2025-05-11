@@ -1,15 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable max-len */
-/* eslint-disable linebreak-style */
-/* eslint-disable consistent-return */
-/* eslint-disable linebreak-style */
-/* eslint-disable indent */
-/* eslint-disable linebreak-style */
-/* eslint-disable import/order */
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable no-else-return */
-/* eslint-disable linebreak-style */
-/* eslint-disable arrow-body-style */
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 
