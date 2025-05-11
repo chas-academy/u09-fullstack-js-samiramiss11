@@ -1,19 +1,28 @@
-/* eslint-disable no-use-before-define */
 /* eslint-disable consistent-return */
 /* eslint-disable global-require */
 const fs = require('fs');
 const path = require('path');
 
-// Patch gOPD.js for case‐sensitive filesystems
-const gopdDir = path.join(__dirname, 'node_modules', 'gopd');
-const srcFile = path.join(gopdDir, 'gopd.js');
-const dstFile = path.join(gopdDir, 'gOPD.js');
-if (fs.existsSync(srcFile) && !fs.existsSync(dstFile)) {
-  try {
-    fs.copyFileSync(srcFile, dstFile);
-    console.log('Patched gOPD.js in gopd module');
-  } catch (err) {
-    console.warn('Failed to patch gOPD.js:', err);
+// Locate the gopd package via require.resolve
+let gopdDir;
+try {
+  // resolve path to gopd’s index.js
+  const gopdIndex = require.resolve('gopd');
+  gopdDir = path.dirname(gopdIndex);
+} catch (err) {
+  console.warn('Could not resolve gopd module:', err);
+}
+
+if (gopdDir) {
+  const srcFile = path.join(gopdDir, 'gopd.js');
+  const dstFile = path.join(gopdDir, 'gOPD.js');
+  if (fs.existsSync(srcFile) && !fs.existsSync(dstFile)) {
+    try {
+      fs.copyFileSync(srcFile, dstFile);
+      console.log('Patched gOPD.js in gopd module at', gopdDir);
+    } catch (err) {
+      console.warn('Failed to patch gOPD.js:', err);
+    }
   }
 }
 const express = require('express');
@@ -23,6 +32,8 @@ const connectDB = require('./config/db');
 
 dotenv.config();
 connectDB(); // Connect Database
+
+const app = express();
 
 const WHITELIST = process.env.NODE_ENV === 'production'
   ? [process.env.FRONTEND_URL]
@@ -37,7 +48,6 @@ app.use(cors({
   },
 }));
 
-const app = express();
 app.use(express.json());
 // Auth / User routes
 const userRoutes = require('./routes/userRoutes');
