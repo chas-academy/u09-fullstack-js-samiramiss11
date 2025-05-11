@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+      "target": "ES2021",
+      "module": "CommonJS",
+      "strict": true,
+      "skipLibCheck": true,       
+      "esModuleInterop": true,
+      "forceConsistentCasingInFileNames": true
+    },
+    "include": [
+      "server/**/*.js",  
+      "server/**/*.ts"
+    ],
+    "exclude": [
+      "node_modules", 
+      "**/node_modules/*",          
+      "build",
+      "dist"
+    ]
+  }
+  
