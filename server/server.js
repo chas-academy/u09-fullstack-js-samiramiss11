@@ -3,6 +3,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
+const path = require('path');
 const connectDB = require('./config/db');
 
 dotenv.config();
@@ -10,18 +11,12 @@ connectDB(); // Connect Database
 
 const app = express();
 
-const WHITELIST = process.env.NODE_ENV === 'production'
-  ? [process.env.FRONTEND_URL]
-  : ['http://localhost:3000', 'http://localhost:5000'];
-
 app.use(cors({
-  origin: (origin, cb) => {
-    // Allow requests with no origin (mobile apps, curl, postman)
-    if (!origin) return cb(null, true);
-    if (WHITELIST.includes(origin)) return cb(null, true);
-    cb(new Error(`CORS policy: Origin ${origin} not allowed`));
-  },
+  origin: 'http://localhost:3000',   // or process.env.FRONTEND_URL in prod
+  methods: ['GET','POST','PUT','DELETE','OPTIONS'],
+  allowedHeaders: ['Content-Type','Authorization']
 }));
+app.options('*', cors());
 
 app.use(express.json());
 // Auth / User routes

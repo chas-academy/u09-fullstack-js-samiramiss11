@@ -1,6 +1,4 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable consistent-return */
-/* eslint-disable linebreak-style */
+
 const Content = require('../models/Content');
 
 // List all

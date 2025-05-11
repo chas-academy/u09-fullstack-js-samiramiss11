@@ -1,5 +1,4 @@
-/* eslint-disable linebreak-style */
-// controllers/bookController.js
+
 const Book = require('../models/Book');
 
 exports.searchBooks = async (req, res) => {
