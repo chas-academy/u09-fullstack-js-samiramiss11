@@ -1,5 +1,4 @@
-// server/config/db.js
-
+/* eslint-disable import/no-unresolved */
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 

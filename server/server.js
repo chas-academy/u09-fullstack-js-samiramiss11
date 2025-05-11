@@ -1,21 +1,5 @@
 /* eslint-disable consistent-return */
 /* eslint-disable global-require */
-const fs = require('fs');
-const path = require('path');
-
-// Locate the gopd package via require.resolve
-try {
-  const gopdIndex = require.resolve('gopd');
-  const gopdDir = path.dirname(gopdIndex);
-  const src = path.join(gopdDir, 'gopd.js');
-  const dst = path.join(gopdDir, 'gOPD.js');
-  if (fs.existsSync(src) && !fs.existsSync(dst)) {
-    fs.copyFileSync(src, dst);
-    console.log('Patched gOPD.js in gopd');
-  }
-} catch (e) {
-  console.warn('gopd shim skipped:', e.message);
-}
 const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
