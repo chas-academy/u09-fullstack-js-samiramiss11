@@ -10,12 +10,16 @@ dotenv.config();
 connectDB(); // Connect Database
 
 const app = express();
+app.get('/', (req, res) => {
+  res.json({ status: 'OK', uptime: process.uptime() });
+});
 
-app.use(cors({
-  origin: 'http://localhost:3000',   // or process.env.FRONTEND_URL in prod
-  methods: ['GET','POST','PUT','DELETE','OPTIONS'],
-  allowedHeaders: ['Content-Type','Authorization']
-}));
+const FRONTEND = process.env.FRONTEND_URL || 'http://localhost:3000';
+app.use(cors({ 
+  origin: FRONTEND, 
+  methods: ['GET','POST','PUT','DELETE','OPTIONS'], 
+  allowedHeaders: ['Content-Type','Authorization'] 
+}))
 app.options('*', cors());
 
 app.use(express.json());
