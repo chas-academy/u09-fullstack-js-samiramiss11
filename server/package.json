@@ -24,6 +24,7 @@
     "mongodb": "^6.10.0",
     "mongoose": "^8.9.3",
     "nodemailer": "^6.10.1",
+    "patch-package": "^8.0.0",
     "qs": "^6.11.3"
   },
   "devDependencies": {
@@ -34,7 +35,6 @@
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "nodemon": "^3.1.10",
-    "patch-package": "^8.0.0",
     "stylelint": "^16.10.0"
   },
   "engines": {
