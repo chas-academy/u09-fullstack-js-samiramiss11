@@ -4,26 +4,17 @@ const fs = require('fs');
 const path = require('path');
 
 // Locate the gopd package via require.resolve
-let gopdDir;
 try {
-  // resolve path to gopd’s index.js
   const gopdIndex = require.resolve('gopd');
-  gopdDir = path.dirname(gopdIndex);
-} catch (err) {
-  console.warn('Could not resolve gopd module:', err);
-}
-
-if (gopdDir) {
-  const srcFile = path.join(gopdDir, 'gopd.js');
-  const dstFile = path.join(gopdDir, 'gOPD.js');
-  if (fs.existsSync(srcFile) && !fs.existsSync(dstFile)) {
-    try {
-      fs.copyFileSync(srcFile, dstFile);
-      console.log('Patched gOPD.js in gopd module at', gopdDir);
-    } catch (err) {
-      console.warn('Failed to patch gOPD.js:', err);
-    }
+  const gopdDir = path.dirname(gopdIndex);
+  const src = path.join(gopdDir, 'gopd.js');
+  const dst = path.join(gopdDir, 'gOPD.js');
+  if (fs.existsSync(src) && !fs.existsSync(dst)) {
+    fs.copyFileSync(src, dst);
+    console.log('Patched gOPD.js in gopd');
   }
+} catch (e) {
+  console.warn('gopd shim skipped:', e.message);
 }
 const express = require('express');
 const dotenv = require('dotenv');
