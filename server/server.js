@@ -24,10 +24,9 @@ const connectDB = require('./config/db');
 dotenv.config();
 connectDB(); // Connect Database
 
-const WHITELIST = [
-  process.env.NODE_ENV === 'production'
-    ? process.env.FRONTEND_URL
-    : 'http://localhost:3000', 'http://localhost:5000'];
+const WHITELIST = process.env.NODE_ENV === 'production'
+  ? [process.env.FRONTEND_URL]
+  : ['http://localhost:3000', 'http://localhost:5000'];
 
 app.use(cors({
   origin: (origin, cb) => {
